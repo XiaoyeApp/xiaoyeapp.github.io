@@ -967,148 +967,122 @@
             <category>WinUI</category>
         </item>
         <item>
-            <title><![CDATA[Windows Desktop Development: Introduction to WinUI 3]]></title>
+            <title><![CDATA[Windows桌面开发：初识WinUI 3]]></title>
             <link>https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3</link>
             <guid>https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3</guid>
             <pubDate>Mon, 30 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[Introduction]]></description>
-            <content:encoded><![CDATA[<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="introduction">Introduction<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#introduction" class="hash-link" aria-label="Introduction的直接链接" title="Introduction的直接链接" translate="no">​</a></h2>
-<p>As a Windows desktop developer, have you ever been confused about how many UI frameworks Microsoft actually has? Win32, MFC, WinForms, WPF, UWP, WinUI… these terms can be overwhelming. Today, we'll sort through the evolution of Windows UI frameworks and focus on Microsoft's current flagship—WinUI 3—to help you take your first step into modern Windows desktop development.</p>
+            <description><![CDATA[引言]]></description>
+            <content:encoded><![CDATA[<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="引言">引言<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E5%BC%95%E8%A8%80" class="hash-link" aria-label="引言的直接链接" title="引言的直接链接" translate="no">​</a></h3>
+<p>作为一名Windows桌面开发者，你是否曾困惑过：微软到底有多少个UI框架？Win32、MFC、WinForms、WPF、UWP、WinUI……这些名词让人眼花缭乱。今天，我们就来梳理一下Windows UI框架的发展历程，并重点介绍微软当前主推的<strong>WinUI 3</strong>，带你迈出Windows现代桌面开发的第一步。</p>
 <!-- -->
-<hr>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="1-three-generations-of-windows-ui-frameworks">1. Three Generations of Windows UI Frameworks<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#1-three-generations-of-windows-ui-frameworks" class="hash-link" aria-label="1. Three Generations of Windows UI Frameworks的直接链接" title="1. Three Generations of Windows UI Frameworks的直接链接" translate="no">​</a></h2>
-<p>Looking back at the history of Windows desktop development, we can roughly divide these frameworks into three stages:</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="first-generation-the-native-era--win32--mfc">First Generation: The Native Era — Win32 / MFC<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#first-generation-the-native-era--win32--mfc" class="hash-link" aria-label="First Generation: The Native Era — Win32 / MFC的直接链接" title="First Generation: The Native Era — Win32 / MFC的直接链接" translate="no">​</a></h3>
-<p><strong>Win32 API</strong> is the lowest-level interface for Windows UI programming, allowing direct interaction with the operating system. When developing desktop applications with Win32, you need to manually handle window messages (WM_PAINT, WM_CLOSE, etc.) and manage handles and resources. The advantages are extremely high performance and strong control, but the downside is low development efficiency—even creating a single button requires dozens of lines of code.</p>
-<p><strong>MFC (Microsoft Foundation Classes)</strong> is a C++ wrapper around Win32 that abstracts windows and controls into C++ classes, simplifying the development process. From the 1990s to the early 2000s, MFC was the mainstream choice for Windows desktop development. However, due to its dependence on C++ complexity and legacy issues, it has gradually faded from the scene.</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="一windows-ui框架的三代演进">一、Windows UI框架的三代演进<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E4%B8%80windows-ui%E6%A1%86%E6%9E%B6%E7%9A%84%E4%B8%89%E4%BB%A3%E6%BC%94%E8%BF%9B" class="hash-link" aria-label="一、Windows UI框架的三代演进的直接链接" title="一、Windows UI框架的三代演进的直接链接" translate="no">​</a></h3>
+<p>回顾Windows桌面开发的历史，我们可以将这些框架大致划分为三个阶段：</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="第一代原生时代--win32--mfc">第一代：原生时代 — Win32 / MFC<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E7%AC%AC%E4%B8%80%E4%BB%A3%E5%8E%9F%E7%94%9F%E6%97%B6%E4%BB%A3--win32--mfc" class="hash-link" aria-label="第一代：原生时代 — Win32 / MFC的直接链接" title="第一代：原生时代 — Win32 / MFC的直接链接" translate="no">​</a></h4>
+<p><strong>Win32 API</strong> 是Windows最底层的界面编程接口，直接与操作系统对话。用Win32开发桌面应用，你需要手动处理窗口消息（WM_PAINT、WM_CLOSE等），管理句柄和资源。优点是性能极高、控制力强，但缺点是开发效率低，即便是创建一个按钮也需要几十行代码。</p>
+<p><strong>MFC（Microsoft Foundation Classes）</strong> 是对Win32的C++封装，将窗口、控件等抽象为C++类，简化了开发流程。在90年代到2000年代初，MFC曾是Windows桌面开发的主流选择。但由于其依赖C++的复杂性和历史遗留问题，如今已逐渐退出舞台。</p>
 <p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/win32mfc-f565a355dc753cccbc25791e44236a57.png" width="852" height="476" class="img_ev3q"></p>
-<blockquote>
-<p><strong>Characteristics:</strong> Low-level, high performance, low development efficiency, rarely used in modern development</p>
-</blockquote>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="second-generation-the-managed-era--winforms--wpf">Second Generation: The Managed Era — WinForms / WPF<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#second-generation-the-managed-era--winforms--wpf" class="hash-link" aria-label="Second Generation: The Managed Era — WinForms / WPF的直接链接" title="Second Generation: The Managed Era — WinForms / WPF的直接链接" translate="no">​</a></h3>
-<p>With the introduction of the .NET Framework, Microsoft launched two major managed UI frameworks:</p>
-<p><strong>WinForms</strong> was released in 2002 with .NET Framework 1.0. It adopts a "what you see is what you get" design philosophy, making drag-and-drop development extremely intuitive and code simple to understand. For traditional business system development (such as inventory management, ERP), WinForms still has a wide user base today.</p>
-<p><strong>WPF (Windows Presentation Foundation)</strong> was released in 2006, bringing revolutionary changes: XAML declarative UI, vector graphics, data binding, and the MVVM pattern. WPF separates the interface from logic, achieving true "UI and code decoupling." Numerous enterprise applications still run on WPF today.</p>
+<p><strong>特点</strong>：底层、高性能、开发效率低、现代开发中较少使用</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="第二代托管时代--winforms--wpf">第二代：托管时代 — WinForms / WPF<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E7%AC%AC%E4%BA%8C%E4%BB%A3%E6%89%98%E7%AE%A1%E6%97%B6%E4%BB%A3--winforms--wpf" class="hash-link" aria-label="第二代：托管时代 — WinForms / WPF的直接链接" title="第二代：托管时代 — WinForms / WPF的直接链接" translate="no">​</a></h4>
+<p>随着.NET Framework的推出，微软带来了两款重磅的托管UI框架：</p>
+<p><strong>WinForms</strong> 于2002年随.NET Framework 1.0发布。它采用“所见即所得”的设计理念，拖拽式开发极为直观，代码简单易懂。对于传统的业务系统开发（如进销存、ERP），WinForms至今仍有大量应用。</p>
+<p><strong>WPF（Windows Presentation Foundation）</strong> 于2006年发布，带来了革命性的变化：采用XAML声明式UI、矢量图形、数据绑定、MVVM模式。WPF让界面与逻辑分离，实现了真正的“UI与代码解耦”。目前仍有大量企业级应用运行在WPF之上。</p>
 <p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/winformwpf-381d835b530e3f4f38cfdefe24ca6352.png" width="786" height="443" class="img_ev3q"></p>
-<blockquote>
-<p><strong>Characteristics:</strong> Managed code, high development efficiency, mature ecosystem, WPF suitable for complex interface development</p>
-</blockquote>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="third-generation-the-modern-era--winrt--uwp--winui">Third Generation: The Modern Era — WinRT / UWP / WinUI<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#third-generation-the-modern-era--winrt--uwp--winui" class="hash-link" aria-label="Third Generation: The Modern Era — WinRT / UWP / WinUI的直接链接" title="Third Generation: The Modern Era — WinRT / UWP / WinUI的直接链接" translate="no">​</a></h3>
-<p><strong>WinRT (Windows Runtime)</strong> was introduced with Windows 8, designed for touchscreens and the Metro style, introducing a new application model and API design.</p>
-<p><strong>UWP (Universal Windows Platform)</strong> is an evolution of WinRT, with the slogan "develop once, run on multiple platforms" (PC, Xbox, HoloLens, etc.). UWP supports modern UI features (such as acrylic effects, fluid animations), but due to mandatory distribution through the Microsoft Store and API restrictions, developer adoption has been limited.</p>
-<p><strong>WinUI 3</strong> is Microsoft's latest native UI framework, which can be seen as the "unbundled" version of UWP—it separates the modern UI control library from UWP, no longer requires Store distribution, and allows developers to use full Windows APIs. WinUI 3 is currently Microsoft's <strong>only heavily invested</strong> desktop UI framework.</p>
+<p><strong>特点</strong>：托管代码、开发效率高、生态成熟、WPF适合复杂界面开发</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="第三代现代时代--winrt--uwp--winui">第三代：现代时代 — WinRT / UWP / WinUI<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E7%AC%AC%E4%B8%89%E4%BB%A3%E7%8E%B0%E4%BB%A3%E6%97%B6%E4%BB%A3--winrt--uwp--winui" class="hash-link" aria-label="第三代：现代时代 — WinRT / UWP / WinUI的直接链接" title="第三代：现代时代 — WinRT / UWP / WinUI的直接链接" translate="no">​</a></h4>
+<p><strong>WinRT（Windows Runtime）</strong> 随Windows 8推出，为触摸屏和Metro风格而生，引入了一种新的应用模型和API设计。</p>
+<p><strong>UWP（Universal Windows Platform）</strong> 是WinRT的进化版，口号是“一次开发，多端运行”（PC、Xbox、HoloLens等）。UWP支持现代UI特性（如亚克力效果、流畅动画），但由于应用分发必须通过Microsoft Store，且API受限，开发者接受度不高。</p>
+<p><strong>WinUI 3</strong> 是微软最新的原生UI框架，可以看作是UWP的“解绑版”——它将UWP的现代UI控件库独立出来，不再强制要求通过Store分发，允许开发者使用完整的Windows API。WinUI 3是微软目前<strong>唯一重点投入</strong>的桌面UI框架。</p>
 <p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/winui3-44de3b4e12c173dc155799cbc4b23a55.png" width="686" height="443" class="img_ev3q"></p>
-<blockquote>
-<p><strong>Characteristics:</strong> Modern UI, fully native, no distribution restrictions, Microsoft's current strategic direction</p>
-</blockquote>
-<hr>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="2-why-choose-winui-3">2. Why Choose WinUI 3?<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#2-why-choose-winui-3" class="hash-link" aria-label="2. Why Choose WinUI 3?的直接链接" title="2. Why Choose WinUI 3?的直接链接" translate="no">​</a></h2>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="1-official-strategic-direction">1. Official Strategic Direction<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#1-official-strategic-direction" class="hash-link" aria-label="1. Official Strategic Direction的直接链接" title="1. Official Strategic Direction的直接链接" translate="no">​</a></h3>
-<p>From Microsoft's official statements and version iterations, WinUI 3 has become the primary framework for Windows desktop development. While WinForms and WPF will continue to be maintained, new features are rarely added; WinUI 3, however, continues to evolve and tightly integrates with Windows 11's new features.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="2-modern-ui-experience">2. Modern UI Experience<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#2-modern-ui-experience" class="hash-link" aria-label="2. Modern UI Experience的直接链接" title="2. Modern UI Experience的直接链接" translate="no">​</a></h3>
-<p>WinUI 3 comes with Fluent Design built-in, giving your applications:</p>
+<p><strong>特点</strong>：现代UI、完全原生、无分发限制、微软当前主力方向</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="二为什么要选择winui-3">二、为什么要选择WinUI 3？<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E4%BA%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%80%89%E6%8B%A9winui-3" class="hash-link" aria-label="二、为什么要选择WinUI 3？的直接链接" title="二、为什么要选择WinUI 3？的直接链接" translate="no">​</a></h3>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="1-官方战略方向">1. 官方战略方向<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#1-%E5%AE%98%E6%96%B9%E6%88%98%E7%95%A5%E6%96%B9%E5%90%91" class="hash-link" aria-label="1. 官方战略方向的直接链接" title="1. 官方战略方向的直接链接" translate="no">​</a></h4>
+<p>从微软的官方宣言和版本迭代来看，WinUI 3已成为Windows桌面开发的<strong>主力框架</strong>。WinForms和WPF虽然仍会维护，但新特性基本不再增加；而WinUI 3持续迭代，与Windows 11的新特性紧密结合。</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="2-现代化的ui体验">2. 现代化的UI体验<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#2-%E7%8E%B0%E4%BB%A3%E5%8C%96%E7%9A%84ui%E4%BD%93%E9%AA%8C" class="hash-link" aria-label="2. 现代化的UI体验的直接链接" title="2. 现代化的UI体验的直接链接" translate="no">​</a></h4>
+<p>WinUI 3内置了Fluent Design（流畅设计体系），让你的应用天生具备：</p>
 <ul>
-<li class=""><strong>Mica</strong> and <strong>Acrylic</strong> effects: Frosted glass-like textures</li>
-<li class=""><strong>Rounded corners and animations</strong>: Aligned with Windows 11's design language</li>
-<li class=""><strong>Dark/Light theme auto-adaptation</strong>: No additional code required</li>
+<li class=""><strong>云母材质（Mica）</strong> 和 <strong>亚克力效果（Acrylic）</strong>：毛玻璃般的质感</li>
+<li class=""><strong>圆角与动效</strong>：符合Windows 11的设计语言</li>
+<li class=""><strong>深色/浅色主题自动适配</strong>：无需额外代码</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="3-full-api-access">3. Full API Access<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#3-full-api-access" class="hash-link" aria-label="3. Full API Access的直接链接" title="3. Full API Access的直接链接" translate="no">​</a></h3>
-<p>Unlike UWP, WinUI 3 applications can call <strong>all Windows APIs</strong> (including registry, system services, any file system location, etc.) without sandbox restrictions. This means you can smoothly migrate powerful features from existing Win32/WPF applications to a modern UI.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="4-multiple-distribution-methods">4. Multiple Distribution Methods<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#4-multiple-distribution-methods" class="hash-link" aria-label="4. Multiple Distribution Methods的直接链接" title="4. Multiple Distribution Methods的直接链接" translate="no">​</a></h3>
-<p>WinUI 3 applications can:</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="3-完全的api访问权限">3. 完全的API访问权限<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#3-%E5%AE%8C%E5%85%A8%E7%9A%84api%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90" class="hash-link" aria-label="3. 完全的API访问权限的直接链接" title="3. 完全的API访问权限的直接链接" translate="no">​</a></h4>
+<p>与UWP不同，WinUI 3应用可以调用<strong>所有Windows API</strong>（包括注册表、系统服务、文件系统任意位置等），没有沙盒限制。这意味着你可以将现有Win32/WPF应用的强大功能平滑迁移到现代UI上。</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="4-多种分发方式">4. 多种分发方式<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#4-%E5%A4%9A%E7%A7%8D%E5%88%86%E5%8F%91%E6%96%B9%E5%BC%8F" class="hash-link" aria-label="4. 多种分发方式的直接链接" title="4. 多种分发方式的直接链接" translate="no">​</a></h4>
+<p>WinUI 3应用可以：</p>
 <ul>
-<li class="">Run directly as .exe files</li>
-<li class="">Be packaged as MSIX for distribution through the Microsoft Store</li>
-<li class="">Be distributed through other installer tools</li>
+<li class="">直接以.exe方式运行</li>
+<li class="">打包为MSIX通过Microsoft Store分发</li>
+<li class="">通过其他安装包工具分发</li>
 </ul>
-<hr>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="3-creating-your-first-winui-3-application">3. Creating Your First WinUI 3 Application<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#3-creating-your-first-winui-3-application" class="hash-link" aria-label="3. Creating Your First WinUI 3 Application的直接链接" title="3. Creating Your First WinUI 3 Application的直接链接" translate="no">​</a></h2>
-<p>Now that we've covered the theory, let's get hands-on and create a simple WinUI 3 application.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="step-1-create-the-project">Step 1: Create the Project<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#step-1-create-the-project" class="hash-link" aria-label="Step 1: Create the Project的直接链接" title="Step 1: Create the Project的直接链接" translate="no">​</a></h3>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="三创建你的第一个winui-3应用">三、创建你的第一个WinUI 3应用<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E4%B8%89%E5%88%9B%E5%BB%BA%E4%BD%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AAwinui-3%E5%BA%94%E7%94%A8" class="hash-link" aria-label="三、创建你的第一个WinUI 3应用的直接链接" title="三、创建你的第一个WinUI 3应用的直接链接" translate="no">​</a></h3>
+<p>理论讲完，我们来动手创建一个简单的WinUI 3应用。</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="步骤1创建项目">步骤1：创建项目<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E6%AD%A5%E9%AA%A41%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE" class="hash-link" aria-label="步骤1：创建项目的直接链接" title="步骤1：创建项目的直接链接" translate="no">​</a></h4>
 <ol>
-<li class="">Open Visual Studio 2022 and click "Create a new project"</li>
-<li class="">Enter "WinUI" in the template search box and select <strong>"Blank App, Packaged (WinUI 3)"</strong></li>
-<li class="">Click "Create," enter a project name such as "Xiaoye Remote," and you'll have a standard WinUI 3 project created</li>
+<li class="">打开Visual Studio 2022，点击“创建新项目”</li>
+<li class="">在模板搜索框中输入“WinUI”，选择 <strong>“空白应用，打包（WinUI 3）”</strong></li>
+<li class="">点击“创建”，输入项目名例如“小烨远控”，即可创建一个普通的WinUI3项目</li>
 </ol>
 <p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/ScreenShot_2026-03-30_202235_169-b6c1f78fd582884c34a24632644eeebe.png" width="894" height="528" class="img_ev3q"></p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="step-2-understand-the-project-structure">Step 2: Understand the Project Structure<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#step-2-understand-the-project-structure" class="hash-link" aria-label="Step 2: Understand the Project Structure的直接链接" title="Step 2: Understand the Project Structure的直接链接" translate="no">​</a></h3>
-<p>After creation, you'll see the following structure:</p>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">├── App.xaml                 # Application entry point, defines startup window and global resources</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">├── App.xaml.cs              # Code-behind for App.xaml</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">├── MainWindow.xaml          # Main window interface</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">├── MainWindow.xaml.cs       # Code-behind for the main window</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">├── Package.appxmanifest     # Packaging configuration file (icons, permissions, etc.)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">└── (Other project files)</span><br></div></code></pre></div></div>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="step-3-design-a-simple-interface">Step 3: Design a Simple Interface<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#step-3-design-a-simple-interface" class="hash-link" aria-label="Step 3: Design a Simple Interface的直接链接" title="Step 3: Design a Simple Interface的直接链接" translate="no">​</a></h3>
-<p>Open <code>MainWindow.xaml</code> and replace the content between <code>&lt;Grid&gt;&lt;/Grid&gt;</code> with the following code:</p>
-<div class="language-xml codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-xml codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token tag punctuation" style="color:#393A34">&lt;</span><span class="token tag" style="color:#00009f">Grid</span><span class="token tag" style="color:#00009f"> </span><span class="token tag attr-name" style="color:#00a4db">Background</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">#20b2aa</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token tag punctuation" style="color:#393A34">&lt;</span><span class="token tag" style="color:#00009f">TextBlock</span><span class="token tag" style="color:#00009f"></span><br></div><div class="token-line" style="color:#393A34"><span class="token tag" style="color:#00009f">        </span><span class="token tag attr-name" style="color:#00a4db">Foreground</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">White</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag" style="color:#00009f"></span><br></div><div class="token-line" style="color:#393A34"><span class="token tag" style="color:#00009f">        </span><span class="token tag attr-name" style="color:#00a4db">HorizontalAlignment</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">Center</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag" style="color:#00009f"></span><br></div><div class="token-line" style="color:#393A34"><span class="token tag" style="color:#00009f">        </span><span class="token tag attr-name" style="color:#00a4db">VerticalAlignment</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">Center</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag" style="color:#00009f"></span><br></div><div class="token-line" style="color:#393A34"><span class="token tag" style="color:#00009f">        </span><span class="token tag attr-name" style="color:#00a4db">FontSize</span><span class="token tag attr-value punctuation attr-equals" style="color:#393A34">=</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag attr-value" style="color:#e3116c">50</span><span class="token tag attr-value punctuation" style="color:#393A34">"</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token plain">Hello World</span><span class="token tag punctuation" style="color:#393A34">&lt;/</span><span class="token tag" style="color:#00009f">TextBlock</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><span class="token plain"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token tag punctuation" style="color:#393A34">&lt;/</span><span class="token tag" style="color:#00009f">Grid</span><span class="token tag punctuation" style="color:#393A34">&gt;</span><br></div></code></pre></div></div>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="step-4-run-the-application">Step 4: Run the Application<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#step-4-run-the-application" class="hash-link" aria-label="Step 4: Run the Application的直接链接" title="Step 4: Run the Application的直接链接" translate="no">​</a></h3>
-<p>Press <strong>F5</strong> to start debugging, and you'll see a basic window:</p>
-<p><img decoding="async" loading="lazy" src="data:image/png;base64,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" width="686" height="443" class="img_ev3q"></p>
-<hr>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="conclusion">Conclusion<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#conclusion" class="hash-link" aria-label="Conclusion的直接链接" title="Conclusion的直接链接" translate="no">​</a></h2>
-<p>As Microsoft's new generation flagship framework for desktop development, WinUI 3 inherits the excellent design concepts of WPF, integrates the modern UI experience of UWP, while removing distribution restrictions. For Windows developers, now is the perfect time to learn WinUI 3—Microsoft is fully committed to it, and the ecosystem is continuously improving.</p>
-<p>I hope this article helps you understand the evolution of Windows UI frameworks and successfully run your first WinUI 3 application!</p>]]></content:encoded>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="步骤2认识项目结构">步骤2：认识项目结构<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/30/first-look-at-winui3#%E6%AD%A5%E9%AA%A42%E8%AE%A4%E8%AF%86%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84" class="hash-link" aria-label="步骤2：认识项目结构的直接链接" title="步骤2：认识项目结构的直接链接" translate="no">​</a></h4>
+<p>创建完成后，你会看到这样的结构：</p>]]></content:encoded>
             <category>WinUI</category>
         </item>
         <item>
-            <title><![CDATA[Elegantly Adjust Your Remote Desktop Display: From Fixed Resolution to Auto-Adaptation]]></title>
+            <title><![CDATA[优雅地调整您的远程桌面显示：从固定分辨率到自动适配]]></title>
             <link>https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution</link>
             <guid>https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution</guid>
             <pubDate>Fri, 27 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[If you've ever used remote desktop software, you've likely encountered this scenario: you try to enlarge the window, and the image becomes blurry; or you want to fill the screen, but you have to set the resolution in advance, and once connected, it can't be changed. This isn't a flaw in any particular software—it's the result of the three long-standing display modes in Windows Remote Desktop, each with its own design logic.]]></description>
-            <content:encoded><![CDATA[<p>If you've ever used remote desktop software, you've likely encountered this scenario: you try to enlarge the window, and the image becomes blurry; or you want to fill the screen, but you have to set the resolution in advance, and once connected, it can't be changed. This isn't a flaw in any particular software—it's the result of the three long-standing display modes in Windows Remote Desktop, each with its own design logic.</p>
+            <description><![CDATA[如果你用过远程桌面，大概率经历过这样的场景：窗口想拉大一点，画面就糊了；想铺满整个屏幕，又得提前设好分辨率，连上就改不了。这不是哪个软件的错，而是Windows远程桌面长期存在的三种显示模式，各自带着一套设计逻辑。]]></description>
+            <content:encoded><![CDATA[<p>如果你用过远程桌面，大概率经历过这样的场景：窗口想拉大一点，画面就糊了；想铺满整个屏幕，又得提前设好分辨率，连上就改不了。这不是哪个软件的错，而是Windows远程桌面长期存在的三种显示模式，各自带着一套设计逻辑。</p>
 <!-- -->
-<hr>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="1-full-screen-mode">1. Full-Screen Mode<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#1-full-screen-mode" class="hash-link" aria-label="1. Full-Screen Mode的直接链接" title="1. Full-Screen Mode的直接链接" translate="no">​</a></h3>
-<p><strong>Design Concept</strong></p>
-<p>This is the most intuitive approach. Entering full-screen mode makes the remote desktop instantly fill your entire display, hiding the title bar, borders, and taskbar, leaving only the remote computer's desktop. It feels as if you're sitting right in front of that machine, with your view completely taken over.</p>
-<p>In full-screen mode, the remote window typically occupies the current display, locking the mouse inside. To switch back to a local application—say, to check a message or reply on WeChat—you need to press a keyboard shortcut to exit full-screen mode.</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-fullscreen7868609-0-c39348b7cef4bcf2f366da647d60685c.png" width="771" height="439" class="img_ev3q"></p>
-<p><strong>User Experience</strong></p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="一全屏模式"><strong>一、全屏模式</strong><a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#%E4%B8%80%E5%85%A8%E5%B1%8F%E6%A8%A1%E5%BC%8F" class="hash-link" aria-label="一全屏模式的直接链接" title="一全屏模式的直接链接" translate="no">​</a></h3>
+<p><strong>设计思路</strong></p>
+<p>这是最直觉的一种方式。进入“全屏”后，远程桌面瞬间铺满整个屏幕，标题栏、边框、任务栏统统隐去，只剩下对端电脑的桌面。你就像坐在那台电脑前一样，视野完全被接管。</p>
+<p>在全屏显示模式下，远程窗口通常会占据你当前所在的屏幕，鼠标被锁定在其中。想切回本地看个消息、回个微信，需要按一下退出全屏的快捷键。</p>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-fullscreen7868609-0-0cff0fb3cf09e0262b9d1c3895d50494.png" width="784" height="418" class="img_ev3q"></p>
+<p><strong>体验特点</strong></p>
 <ul>
-<li class="">Strongest immersion, ideal for extended focused work</li>
-<li class="">Maximised screen utilisation, unaffected by local window layouts</li>
-<li class="">On multi-monitor setups, full-screen usually takes over the current display, with the mouse confined to it</li>
+<li class="">沉浸感最强，适合长时间专注工作</li>
+<li class="">画面利用率高，不受本地窗口布局影响</li>
+<li class="">在多显示器环境下，全屏通常会占据当前屏幕，鼠标被锁定在其中</li>
 </ul>
-<p><strong>Best For</strong></p>
-<p>Scenarios where you need to "live" inside the remote computer without interruptions from local tasks.</p>
-<hr>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="2-fixed-resolution-mode">2. Fixed Resolution Mode<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#2-fixed-resolution-mode" class="hash-link" aria-label="2. Fixed Resolution Mode的直接链接" title="2. Fixed Resolution Mode的直接链接" translate="no">​</a></h3>
-<p><strong>Design Concept</strong></p>
-<p>This is the more traditional approach. Before connecting, you specify the resolution you want—for example, 800×600. The remote host then outputs exactly that resolution, and the client displays it pixel-for-pixel.</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-QQ20260327-091139-72fe9fd67834cff916796608bc54837d.png" width="436" height="505" class="img_ev3q"></p>
-<p><strong>User Experience</strong></p>
+<p><strong>适用场景</strong></p>
+<p>需要暂时“住”在远程电脑里，不受本地任务打扰的时候。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="二固定分辨率模式"><strong>二、固定分辨率模式</strong><a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#%E4%BA%8C%E5%9B%BA%E5%AE%9A%E5%88%86%E8%BE%A8%E7%8E%87%E6%A8%A1%E5%BC%8F" class="hash-link" aria-label="二固定分辨率模式的直接链接" title="二固定分辨率模式的直接链接" translate="no">​</a></h3>
+<p><strong>设计思路</strong></p>
+<p>这种方式更“传统”。在连接之前，你告诉客户端：我要一个 800x600的桌面。于是远程主机真的按这个分辨率输出画面，客户端则原样呈现，每个像素都对应得整整齐齐。</p>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-QQ20260327-091139-4fc56925363258fe31f6b5578905cb0f.png" width="384" height="514" class="img_ev3q"></p>
+<p><strong>体验特点</strong></p>
 <ul>
-<li class="">Crystal-clear visuals, with pixel-perfect rendering</li>
-<li class="">Stable layout, independent of the local window size</li>
-<li class="">After connecting, the window itself has a maximum size limit—you cannot drag it beyond the pre-set resolution</li>
+<li class="">画面清晰锐利，点对点显示</li>
+<li class="">不受本地窗口大小影响，远程桌面内容布局稳定</li>
+<li class="">当你用固定分辨率模式连接远程桌面后，窗口本身是有最大尺寸限制的——你不能把它拖到超过预设分辨率的尺寸。</li>
 </ul>
-<p><strong>Best For</strong></p>
-<p>Situations where image quality matters and the window size remains relatively fixed, such as remote debugging or reviewing design drafts.</p>
-<hr>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="3-scaling-mode">3. Scaling Mode<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#3-scaling-mode" class="hash-link" aria-label="3. Scaling Mode的直接链接" title="3. Scaling Mode的直接链接" translate="no">​</a></h3>
-<p><strong>Design Concept</strong></p>
-<p>No matter how large or small you drag the window, the remote desktop content scales proportionally to fill it. This is achieved through interpolation algorithms: when the window grows, the content is "stretched"; when it shrinks, the content is "compressed". As a result, the display always fits the window, but text edges become less sharp, and icon details degrade slightly. On a 4K screen, shrinking a remote window can make text difficult to read.</p>
+<p><strong>适用场景</strong></p>
+<p>对画质有要求、窗口大小基本固定的场景，比如远程调试代码、查看设计稿。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="三缩放模式"><strong>三、缩放模式</strong><a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#%E4%B8%89%E7%BC%A9%E6%94%BE%E6%A8%A1%E5%BC%8F" class="hash-link" aria-label="三缩放模式的直接链接" title="三缩放模式的直接链接" translate="no">​</a></h3>
+<p><strong>设计思路</strong></p>
+<p>窗口拖多大，远程桌面就填多大。画面通过插值算法等比缩放，始终铺满当前窗口。这背后其实是一套插值算法在起作用。窗口变大了，内容被“撑大”；窗口变小了，内容被“压缩”。结果是：画面始终适配窗口，但文字边缘不再那么锐利，图标细节也略有损失。如果你在 4K 屏幕上把一个远程窗口缩得比较小，那些文字可能变得不太好辨认。</p>
 <p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/Adaptive-scaling9879878960-f96f7fd30d4d42be82d9b271fc2c1b48.png" width="827" height="581" class="img_ev3q"></p>
-<p><strong>User Experience</strong></p>
+<p><strong>体验特点</strong></p>
 <ul>
-<li class="">Window can be resized arbitrarily; content always fits proportionally</li>
-<li class="">Extremely adaptable—works with any window shape or size</li>
-<li class="">Scaling affects sharpness; text and icons are less crisp than in fixed-resolution mode</li>
+<li class="">窗口可以任意调整，画面始终按照比例适配</li>
+<li class="">适应性最强，无论窗口形状、大小如何变化，都能完整显示</li>
+<li class="">缩放过程中，画面清晰度会有所变化，文字和图标细节不如原分辨率锐利</li>
 </ul>
-<p><strong>Best For</strong></p>
-<p>Everyday office work and tasks where the window size changes frequently and absolute sharpness isn't critical.</p>
-<hr>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="4-trade-offs-among-the-three-modes">4. Trade-offs Among the Three Modes<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#4-trade-offs-among-the-three-modes" class="hash-link" aria-label="4. Trade-offs Among the Three Modes的直接链接" title="4. Trade-offs Among the Three Modes的直接链接" translate="no">​</a></h3>
-<p>From a design perspective, these three modes cater to different usage habits:</p>
-<table><thead><tr><th>Mode</th><th>Core Value</th><th>Characteristics</th></tr></thead><tbody><tr><td>Full-Screen</td><td>Immersion</td><td>Occupies the entire display; strong focus</td></tr><tr><td>Fixed Resolution</td><td>Clarity</td><td>Pixel-perfect; stable visuals</td></tr><tr><td>Scaling</td><td>Flexibility</td><td>Adapts to window size; natural interaction</td></tr></tbody></table>
-<p>Each mode has its strengths, but they share a common limitation: <strong>the resolution is fixed once the connection is established</strong>. In full-screen mode, the resolution is determined by the physical display; in fixed-resolution mode, it's set beforehand; in scaling mode, while the window can change, the image quality varies with the scaling factor.</p>
-<hr>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="5-xiaoye-remote-control-a-new-balance-between-clarity-and-flexibility">5. Xiaoye Remote Control: A New Balance Between Clarity and Flexibility<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#5-xiaoye-remote-control-a-new-balance-between-clarity-and-flexibility" class="hash-link" aria-label="5. Xiaoye Remote Control: A New Balance Between Clarity and Flexibility的直接链接" title="5. Xiaoye Remote Control: A New Balance Between Clarity and Flexibility的直接链接" translate="no">​</a></h3>
-<p>Is there a way to freely adjust the window like scaling mode while maintaining the sharpness of fixed-resolution mode?</p>
-<p>Xiaoye Remote takes a different approach: <strong>it dynamically adjusts the resolution rather than scaling the image</strong>.</p>
-<p>When you enlarge the window, it tells the remote host: "The window is now bigger—please send me a new resolution that matches." When you shrink the window, it adjusts accordingly. Every time the window size changes, the resolution updates seamlessly. The result is a 1:1 pixel mapping, with no interpolation, no blur, and no empty borders.</p>
-<p>There's no need to reconnect or manually tweak settings—the display always adapts to the window, eliminating the blur of scaling mode, the rigidity of fixed-resolution mode, and the lock-in of full-screen mode.</p>
-<p>It feels like using a local application: you can freely resize the window, and the content remains perfectly clear.</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-xiaoyeremote-switch-20a1f973b879c097fd3bac65682bd177.png" width="798" height="432" class="img_ev3q"></p>
-<hr>
-<p><strong>Note:</strong> Xiaoye Remote is designed to connect two computers over the internet, so you need to sign in on both machines to use it.</p>]]></content:encoded>
+<p><strong>适用场景</strong></p>
+<p>日常办公、窗口大小经常变化的操作，对画质不苛求的场景。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="四三种模式各自取舍"><strong>四、三种模式，各自取舍</strong><a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#%E5%9B%9B%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E5%90%84%E8%87%AA%E5%8F%96%E8%88%8D" class="hash-link" aria-label="四三种模式各自取舍的直接链接" title="四三种模式各自取舍的直接链接" translate="no">​</a></h3>
+<p>从设计初衷来看，这三种模式分别满足了不同的使用习惯：</p>
+<table><thead><tr><th>模式</th><th>核心价值</th><th>特点</th></tr></thead><tbody><tr><td>全屏</td><td>沉浸</td><td>独占屏幕，专注感强</td></tr><tr><td>固定分辨率</td><td>清晰</td><td>点对点显示，画面稳定</td></tr><tr><td>缩放</td><td>灵活</td><td>随窗口自适应，操作自然</td></tr></tbody></table>
+<p>它们各自的侧重点不同。但有一个共同点：<strong>分辨率在连接后就固定了</strong>——全屏模式下分辨率由显示器决定，固定分辨率模式下由预设值决定，缩放模式下虽然窗口可以变，但画质会随缩放比例变化。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="五小烨远控在清晰与灵活之间找到一个新答案"><strong>五、小烨远控：在清晰与灵活之间，找到一个新答案</strong><a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/27/adjust-resolution#%E4%BA%94%E5%B0%8F%E7%83%A8%E8%BF%9C%E6%8E%A7%E5%9C%A8%E6%B8%85%E6%99%B0%E4%B8%8E%E7%81%B5%E6%B4%BB%E4%B9%8B%E9%97%B4%E6%89%BE%E5%88%B0%E4%B8%80%E4%B8%AA%E6%96%B0%E7%AD%94%E6%A1%88" class="hash-link" aria-label="五小烨远控在清晰与灵活之间找到一个新答案的直接链接" title="五小烨远控在清晰与灵活之间找到一个新答案的直接链接" translate="no">​</a></h3>
+<p>有没有一种方式，既能像缩放模式那样随意调整窗口，又能像固定分辨率那样保持画面清晰？</p>
+<p>小烨远控的做法是：<strong>动态调整分辨率，而不是缩放画面</strong>。</p>
+<p>当窗口被拖大时，它告诉远程主机：“现在屏幕变大了，请按新尺寸输出画面。” 当窗口缩小时，同样也会实时调整。每一次窗口变化，都触发一次分辨率更新，画面始终以 1:1 的方式呈现，不做任何插值，没有锯齿，也没有留白。</p>
+<p>整个过程不需要重连，不需要手动设置，窗口怎么变，画面就怎么适配。它既没有缩放模式的模糊，也没有固定分辨率的“一锤子买卖”，更不需要像全屏那样“锁死”你的操作。</p>
+<p>这种体验，更像是你在操作一台本地电脑：窗口可以随意拖拽，内容始终清晰。</p>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/cn-xiaoyeremote-switch-f8226b9a063abb820b0c8574d948c974.png" width="798" height="444" class="img_ev3q"></p>
+<p>注：小烨远控是为了两台异地电脑打通互联用的，因此需要在两台电脑上登录使用；</p>]]></content:encoded>
             <category>Windows远程</category>
         </item>
         <item>
@@ -1141,105 +1115,111 @@
             <category>动态</category>
         </item>
         <item>
-            <title><![CDATA[Windows Remote Desktop: Create Your Own Shortcuts]]></title>
+            <title><![CDATA[Windows远程桌面：打造属于你的专属快捷方式]]></title>
             <link>https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic</link>
             <guid>https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic</guid>
             <pubDate>Fri, 20 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[In daily work, Remote Desktop (mstsc) is a common tool for connecting to servers or office computers. Having to enter the IP address, username, and password every time can be a bit tedious. Today, I'll share a few tips to help you turn Remote Desktop into a one-click connection shortcut.]]></description>
-            <content:encoded><![CDATA[<p>In daily work, Remote Desktop (mstsc) is a common tool for connecting to servers or office computers. Having to enter the IP address, username, and password every time can be a bit tedious. Today, I'll share a few tips to help you turn Remote Desktop into a one-click connection shortcut.</p>
+            <description><![CDATA[在日常工作中，远程桌面（mstsc）是我们连接服务器或办公电脑的常用工具。每次都输入IP地址、用户名和密码确实有点繁琐。今天，我就来分享几个小技巧，帮你把远程桌面变成一键连接的快捷方式。]]></description>
+            <content:encoded><![CDATA[<p>在日常工作中，远程桌面（mstsc）是我们连接服务器或办公电脑的常用工具。每次都输入IP地址、用户名和密码确实有点繁琐。今天，我就来分享几个小技巧，帮你把远程桌面变成一键连接的快捷方式。</p>
 <!-- -->
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="1-basic-operation-save-an-rdp-file">1. Basic Operation: Save an RDP File<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#1-basic-operation-save-an-rdp-file" class="hash-link" aria-label="1. Basic Operation: Save an RDP File的直接链接" title="1. Basic Operation: Save an RDP File的直接链接" translate="no">​</a></h2>
-<p>Windows Remote Desktop Connection (mstsc.exe) allows you to save connection configurations as a file with the <code>.rdp</code> extension, so you don't have to re-enter all the information next time.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="steps">Steps:<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#steps" class="hash-link" aria-label="Steps:的直接链接" title="Steps:的直接链接" translate="no">​</a></h3>
-<ul>
-<li class="">Press <code>Win + R</code>, type <code>mstsc</code>, and open the Remote Desktop Connection window</li>
-<li class="">Enter the computer's IP address and username</li>
-<li class="">Click "Show Options" below the Connect button to expand more settings</li>
-<li class="">In the "General" tab, click the "Save As" button at the bottom</li>
-<li class="">Choose a save location, enter a filename, and click Save</li>
-</ul>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-ScreenShot_2026-03-20_163119_926-682add9f2d117a3e6eb424addc87aa6b.png" width="488" height="568" class="img_ev3q"></p>
-<p>Now you have an <code>.rdp</code> file on your desktop. Double-click it to quickly initiate a connection.</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="一基础操作保存rdp文件">一、基础操作：保存RDP文件<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E4%B8%80%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E4%BF%9D%E5%AD%98rdp%E6%96%87%E4%BB%B6" class="hash-link" aria-label="一、基础操作：保存RDP文件的直接链接" title="一、基础操作：保存RDP文件的直接链接" translate="no">​</a></h2>
+<p>Windows远程桌面连接（mstsc.exe）允许我们将连接配置保存为一个扩展名为.rdp的文件，这样下次就不用重新填写所有信息了。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="操作步骤">操作步骤：<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4" class="hash-link" aria-label="操作步骤：的直接链接" title="操作步骤：的直接链接" translate="no">​</a></h3>
+<ol>
+<li class="">按下Win + R键，输入mstsc，打开远程桌面连接窗口</li>
+<li class="">输入计算机IP地址和用户名</li>
+<li class="">点击“连接”按钮下方的“显示选项”展开更多设置</li>
+<li class="">在“常规”选项卡中，点击下方的“另存为”按钮</li>
+<li class="">选择保存位置，输入文件名，点击保存</li>
+</ol>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-ScreenShot_2026-03-20_164307_701-41da7cf175069ea9bda441c5334cde31.png" width="489" height="647" class="img_ev3q"></p>
+<p>现在你桌面上就有了一个rdp文件，双击它就能快速发起连接。</p>
 <p><img decoding="async" loading="lazy" src="data:image/png;base64,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" width="73" height="82" class="img_ev3q"></p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="2-advanced-tip-make-the-rdp-file-remember-the-password">2. Advanced Tip: Make the RDP File Remember the Password<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#2-advanced-tip-make-the-rdp-file-remember-the-password" class="hash-link" aria-label="2. Advanced Tip: Make the RDP File Remember the Password的直接链接" title="2. Advanced Tip: Make the RDP File Remember the Password的直接链接" translate="no">​</a></h2>
-<p>By default, a saved RDP file does not include the password, so you still need to enter it manually each time. To achieve a true "one-click connection," here's a simple trick.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="two-steps-to-remember-the-password">Two Steps to Remember the Password:<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#two-steps-to-remember-the-password" class="hash-link" aria-label="Two Steps to Remember the Password:的直接链接" title="Two Steps to Remember the Password:的直接链接" translate="no">​</a></h3>
-<p><strong>Step 1: Check "Save Credentials," then Save As an RDP File</strong></p>
-<p><strong><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-QQ20260314-163723-5adb45fbcef3a592502992b037e9cda8.png" width="485" height="562" class="img_ev3q"></strong></p>
-<p><strong>Step 2: Run the RDP File</strong></p>
-<p>Double-click the RDP file again. This time, you'll need to enter the password once. After the connection completes, the password will be saved automatically.</p>
-<p><strong>Principle:</strong> The "save credentials" operation in the RDP file saves the credentials to the Windows Credential Manager. From then on, double-clicking this RDP file allows you to log in directly without re-entering the password.</p>
-<p><strong>Reminder:</strong> Do not save credentials on public computers.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="3-security-alert-the-yellow-warning-on-rdp-files">3. Security Alert: The Yellow Warning on RDP Files<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#3-security-alert-the-yellow-warning-on-rdp-files" class="hash-link" aria-label="3. Security Alert: The Yellow Warning on RDP Files的直接链接" title="3. Security Alert: The Yellow Warning on RDP Files的直接链接" translate="no">​</a></h2>
-<p>When you double-click an RDP file, you might see a yellow security warning:</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-QQ20260314-162447-dfae9e9a8847c32272f0ee260b658762.png" width="542" height="287" class="img_ev3q"></p>
-<p>This warning is a security feature in Windows, as RDP files may come from untrusted sources and automatically initiate a connection when double-clicked. However, if you created the RDP file yourself or it comes from a trusted colleague, this recurring warning can be a bit annoying.</p>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="how-to-make-an-rdp-file-trusted">How to Make an RDP File "Trusted"?<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#how-to-make-an-rdp-file-trusted" class="hash-link" aria-label="How to Make an RDP File &quot;Trusted&quot;?的直接链接" title="How to Make an RDP File &quot;Trusted&quot;?的直接链接" translate="no">​</a></h3>
-<p>To make Windows trust your RDP file, you need to digitally sign it. A signed RDP file will have the following characteristics:</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="二进阶技巧让rdp文件记住密码">二、进阶技巧：让RDP文件记住密码<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E4%BA%8C%E8%BF%9B%E9%98%B6%E6%8A%80%E5%B7%A7%E8%AE%A9rdp%E6%96%87%E4%BB%B6%E8%AE%B0%E4%BD%8F%E5%AF%86%E7%A0%81" class="hash-link" aria-label="二、进阶技巧：让RDP文件记住密码的直接链接" title="二、进阶技巧：让RDP文件记住密码的直接链接" translate="no">​</a></h2>
+<p>默认保存的RDP文件不会包含密码，每次连接还是需要手动输入。要实现真正的“一键连接”，我们需要一个小技巧。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="两步搞定记住密码">两步搞定记住密码：<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E4%B8%A4%E6%AD%A5%E6%90%9E%E5%AE%9A%E8%AE%B0%E4%BD%8F%E5%AF%86%E7%A0%81" class="hash-link" aria-label="两步搞定记住密码：的直接链接" title="两步搞定记住密码：的直接链接" translate="no">​</a></h3>
+<p><strong>第一步：先勾选“保存凭据”，然后另存为rdp文件；</strong></p>
+<p><strong><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-QQ20260314-163938-8d429bc19e5b8a039a86e840c55ee698.png" width="480" height="648" class="img_ev3q"></strong></p>
+<p><strong>第二步：运行rdp文件</strong></p>
+<ol>
+<li class="">再次双击rdp文件，此时需要输入一次密码，完成连接后将自动保存；</li>
+</ol>
+<p>原理：rdp文件的“记住凭据”操作将凭据保存到了Windows凭据管理器中，以后双击这个RDP文件，就能直接登录，无需再次输入密码。</p>
+<p><strong>提醒：公共电脑上不要随便保存凭据；</strong></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="三安全提示rdp文件的黄色警告">三、安全提示：RDP文件的黄色警告<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E4%B8%89%E5%AE%89%E5%85%A8%E6%8F%90%E7%A4%BArdp%E6%96%87%E4%BB%B6%E7%9A%84%E9%BB%84%E8%89%B2%E8%AD%A6%E5%91%8A" class="hash-link" aria-label="三、安全提示：RDP文件的黄色警告的直接链接" title="三、安全提示：RDP文件的黄色警告的直接链接" translate="no">​</a></h2>
+<p>双击RDP文件时，你可能会看到一个黄色的安全警告：</p>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-QQ20260314-162325-e45d039f52d821594434b8cd815a1cdc.png" width="586" height="377" class="img_ev3q"></p>
+<p>这个警告是Windows出于安全考虑而设计的，因为RDP文件可能来自不可信来源，双击后会自动执行连接。但如果你是自己创建的RDP文件，或者来自可信同事，这个警告每次出现确实有点烦人。</p>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="如何让rdp文件变得可信">如何让RDP文件变得“可信”？<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E5%A6%82%E4%BD%95%E8%AE%A9rdp%E6%96%87%E4%BB%B6%E5%8F%98%E5%BE%97%E5%8F%AF%E4%BF%A1" class="hash-link" aria-label="如何让RDP文件变得“可信”？的直接链接" title="如何让RDP文件变得“可信”？的直接链接" translate="no">​</a></h3>
+<p>要让Windows信任你的RDP文件，需要对其进行数字签名。签名后的RDP文件会有以下特征：</p>
 <ul>
-<li class="">The yellow warning bar changes to blue or green (indicating the publisher has been verified)</li>
-<li class="">Displays "This remote connection is signed by a trusted publisher"</li>
+<li class="">黄色警告栏变为蓝色或绿色（表示发布者已验证）</li>
+<li class="">显示“此远程连接已由可信发布者签名”</li>
 </ul>
-<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="rdp-file-signing-methods">RDP File Signing Methods:<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#rdp-file-signing-methods" class="hash-link" aria-label="RDP File Signing Methods:的直接链接" title="RDP File Signing Methods:的直接链接" translate="no">​</a></h3>
-<ul>
-<li class=""><strong>Use a code signing certificate</strong>: Purchase a code signing certificate from a legitimate CA (such as Symantec, DigiCert)</li>
-<li class=""><strong>Sign with rdpsign</strong>:</li>
-</ul>
-<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">rdpsign /sha256 &lt;your certificate thumbprint&gt; &lt;rdp file&gt;</span><br></div></code></pre></div></div>
-<ul>
-<li class=""><strong>Verify the signature</strong>: Right-click the RDP file &gt; Properties &gt; Digital Signatures tab, where you can see the signature information</li>
-</ul>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-QQ20260314-162407-3cd7d3a37a4905013c1b48a2ffa5fdd6.png" width="542" height="287" class="img_ev3q"></p>
-<p>Double-click the RDP file again, and it looks much cleaner. Of course, signing is not just about appearance—it also prevents tampering with critical information. If someone modifies key information in your RDP file, the signature will become invalid immediately, triggering another orange warning.</p>
-<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="4-summary-and-best-practices">4. Summary and Best Practices<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#4-summary-and-best-practices" class="hash-link" aria-label="4. Summary and Best Practices的直接链接" title="4. Summary and Best Practices的直接链接" translate="no">​</a></h2>
-<ul>
-<li class=""><strong>Personal daily use</strong>: Follow Step 2 to set up an RDP file that remembers the password for quick and convenient access</li>
-<li class=""><strong>Team shared connections</strong>: Use RDP files without saved passwords, paired with a shared password management tool</li>
-<li class=""><strong>Security-sensitive environments</strong>: Enable the "Always prompt for password" policy in Group Policy, or use certificate-signed RDP files</li>
-<li class=""><strong>Cross-platform use</strong>: Other remote desktop clients that support the RDP protocol generally also support importing RDP files, making things much easier</li>
-</ul>
-<p>If you use Xiaoye Remote, the default experience is the same as using an RDP file—just double-click to connect. You can also choose to remember the password, which works similarly to the process described above—saving credentials to your local system's Windows Credential Manager</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-QQ20260320-170041-e1743ff4b3b6a89e8a336eb872411bce.png" width="798" height="432" class="img_ev3q"></p>
-<p>With these tips, your remote work experience will be smoother. If you have any questions or better suggestions, feel free to leave a comment below!</p>]]></content:encoded>
+<h3 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="rdp文件签名方法">RDP文件签名方法：<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#rdp%E6%96%87%E4%BB%B6%E7%AD%BE%E5%90%8D%E6%96%B9%E6%B3%95" class="hash-link" aria-label="RDP文件签名方法：的直接链接" title="RDP文件签名方法：的直接链接" translate="no">​</a></h3>
+<ol>
+<li class=""><strong>使用代码签名证书</strong>：可以从正规CA（如Symantec、DigiCert）购买代码签名证书</li>
+<li class=""><strong>使用rdpsign签名</strong>：</li>
+</ol>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">rdpsign /sha256 &lt;你的证书指纹&gt; &lt;rdp文件&gt;</span><br></div></code></pre></div></div>
+<ol start="3">
+<li class=""><strong>验证签名</strong>：右键点击RDP文件 &gt; 属性 &gt; 数字签名选项卡，可以看到签名信息</li>
+</ol>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-QQ20260314-161914-6e000bc1faf5a76daeb9999378213a1d.png" width="584" height="376" class="img_ev3q"></p>
+<p>再次双击rdp文件，看起来清爽了不少。当然签名不仅仅是为了好看，更重要的是为了防止关键信息的篡改，如果别人修改了你的rdp文件关键信息，签名信息将瞬间失效，会再次弹出橙色警告。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="四总结与最佳实践">四、总结与最佳实践<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/20/rdp-file-basic#%E5%9B%9B%E6%80%BB%E7%BB%93%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5" class="hash-link" aria-label="四、总结与最佳实践的直接链接" title="四、总结与最佳实践的直接链接" translate="no">​</a></h2>
+<ol>
+<li class=""><strong>个人日常使用</strong>：按步骤二设置记住密码的RDP文件，方便快捷；</li>
+<li class=""><strong>团队共享连接</strong>：使用未保存密码的RDP文件，配合共享密码管理工具</li>
+<li class=""><strong>安全敏感环境</strong>：启用组策略中的“始终提示密码”，或使用证书签名的RDP文件</li>
+<li class=""><strong>跨平台使用</strong>：其他平台的支持rdp协议的远程桌面客户端一般也支持rdp文件导入，这样也会方便不少；</li>
+</ol>
+<p>如果您使用小烨远控，默认和rdp文件体验效果一致，双击即可连接，您也可以选择记住密码，记住密码和上述过程类似，都是保存至您的本地系统Windows凭据管理器；</p>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-QQ20260320-165947-3dc3380d49d5ebf7d6d61889036ec31e.png" width="798" height="432" class="img_ev3q"></p>
+<p>掌握了这些技巧，相信你的远程工作体验会更加顺畅。如果你有任何问题或更好的建议，欢迎在评论区留言讨论！</p>]]></content:encoded>
             <category>Windows远程</category>
         </item>
         <item>
-            <title><![CDATA[Xiaoye Remote 2.0.82 Released: Two Devices Permanently Free]]></title>
+            <title><![CDATA[小烨远控2.0.82发布：两台设备永久免费]]></title>
             <link>https://xiaoyeapp.com/zh-cn/blog/2026/03/18/2082-two-devices-free</link>
             <guid>https://xiaoyeapp.com/zh-cn/blog/2026/03/18/2082-two-devices-free</guid>
             <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[Category 3/18/2026]]></description>
-            <content:encoded><![CDATA[<p>Category: News Published: 3/18/2026</p>
-<p>Tired of complicated network configurations for remote work? Or have you been trying out various solutions in search of a remote control tool that is <strong>both safe and free</strong>? Today, the new version of Xiaoye Remote Control might just be the answer you're looking for.</p>
-<p>We are excited to announce the official release of <strong>Xiaoye Remote Control version 2.0.82</strong>! This update introduces an incredibly user-friendly policy: <strong>Two devices, permanently free</strong>. Whether you're providing technical support for a family computer or need seamless switching between two office locations, this free tier covers the daily needs of most individual users.</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/en-QQ20260318-143946-3b5cecd68a4c11dc887c436716cd1017.png" width="798" height="432" class="img_ev3q"></p>
+            <description><![CDATA[还在为远程办公时复杂的网络配置烦恼？或为寻找一款既安全又免费的远控方案而四处尝试？今天，小烨远控带来的新版本，或许正是您需要的答案。]]></description>
+            <content:encoded><![CDATA[<p>还在为远程办公时复杂的网络配置烦恼？或为寻找一款<strong>既安全又免费</strong>的远控方案而四处尝试？今天，小烨远控带来的新版本，或许正是您需要的答案。</p>
+<p>我们很高兴地宣布，<strong>小烨远控2.0.82版本正式发布！</strong> 本次更新带来了一个极具诚意的政策：<strong>两台设备，永久免费</strong>。无论您是为家庭电脑提供技术支持，还是需要在两个办公地点间无缝切换，这个免费版本足以覆盖大多数个人用户的日常需求。</p>
+<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/zh-cn/assets/images/zh-QQ20260318-143721-562ac9e3291faa0f7b897027d149ed4a.png" width="798" height="432" class="img_ev3q"></p>
 <!-- -->
-<p><strong>Why Choose Xiaoye Remote Control?</strong></p>
-<p>Building on its free model, Xiaoye Remote Control is committed to delivering excellence in <strong>both security and user experience</strong>.</p>
-<p><strong>1. Security, Designed from the Ground Up</strong></p>
-<ul>
-<li class=""><strong>Device Isolation by Account</strong>: Your devices are only visible to your own account, naturally protecting them from random scans and attacks originating from the public internet.</li>
-<li class=""><strong>End-to-End Encryption</strong>: All remote connection data is encrypted with strong algorithms, ensuring your operations remain private even on public networks.</li>
-<li class=""><strong>No Public IP Required</strong>: Say goodbye to complex port forwarding and network configurations, fundamentally reducing your exposure to cyber threats.</li>
-</ul>
-<p><strong>2. Performance, Built for Efficiency</strong></p>
-<ul>
-<li class=""><strong>Domestic Multi-Node Acceleration</strong>: We have deployed multiple network nodes within the country. The system automatically selects the optimal path for you, significantly reducing latency and making remote operations feel as smooth as local ones.</li>
-<li class=""><strong>Native RDP Experience</strong>: With perfect support for the Windows Remote Desktop Protocol, Windows users can enjoy the most familiar and efficient native desktop access experience.</li>
-</ul>
-<p><strong>3. Convenience, One Account for All</strong></p>
-<ul>
-<li class="">Supports various login methods including <strong>email, WeChat, and phone number</strong>. You can also quickly log in using your existing Microsoft or GitHub accounts, eliminating the need for repeated registrations. One "Xiaoye Passport" manages all your remote devices and future services.</li>
-</ul>
-<p><strong>How to Get Started?</strong></p>
-<p>Experiencing Xiaoye Remote Control is simple, just three steps:</p>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="为什么选择小烨远控">为什么选择小烨远控？<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/18/2082-two-devices-free#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E5%B0%8F%E7%83%A8%E8%BF%9C%E6%8E%A7" class="hash-link" aria-label="为什么选择小烨远控？的直接链接" title="为什么选择小烨远控？的直接链接" translate="no">​</a></h4>
+<p>在免费的基础上，小烨远控更坚持在<strong>安全与体验</strong>上做到极致。</p>
 <ol>
-<li class="">Visit the <strong>Xiaoye Remote Control official website (<a href="https://xiaoyeapp.com/" target="_blank" rel="noopener noreferrer" class="">https://xiaoyeapp.com</a>)</strong> to download the client.</li>
-<li class="">Log in using your preferred method (email accounts require initial registration, while third-party options like WeChat allow direct login).</li>
-<li class="">Log in to the same account on your two devices, and your permanently free remote journey begins!</li>
+<li class=""><strong>安全，从底层设计开始</strong>
+<ul>
+<li class=""><strong>设备按账户隔离</strong>：您的设备仅对您自己的账户可见，天然避免了来自公网的随意扫描和攻击。</li>
+<li class=""><strong>全程加密，无惧窥探</strong>：所有远程连接数据均经过高强度加密，确保您在公共网络下操作也足够私密。</li>
+<li class=""><strong>无需公网IP</strong>：告别复杂的端口映射和网络配置，从根本上减少了网络攻击面。</li>
+</ul>
+</li>
+<li class=""><strong>性能，为高效工作而生</strong>
+<ul>
+<li class=""><strong>国内多节点加速</strong>：我们在国内部署了多个网络节点，系统会自动为您选择最优路径，显著降低延迟，让远程操作像在本地一样流畅。</li>
+<li class=""><strong>原生RDP体验</strong>：完美支持Windows远程桌面协议，如果您是Windows用户，能享受到最熟悉、最高效的原生桌面访问体验。</li>
+</ul>
+</li>
+<li class=""><strong>便捷，一个账号通行</strong>
+<ul>
+<li class="">支持<strong>邮箱、微信、手机号</strong>等多种登录方式。您也可以使用已有的Microsoft、GitHub账号快速接入，无需重复注册。一个“小烨通行证”，即可管理您的所有远程设备和未来更多服务。</li>
+</ul>
+</li>
 </ol>
-<p>Xiaoye Remote Control 2.0.82 aims to be your <strong>secure, high-speed, and simple remote desktop partner</strong>. Whether you're a remote professional or the "family IT consultant" helping relatives with their computers, you're welcome to give it a try.</p>
-<p>If you encounter any issues during use, or have any suggestions, please feel free to provide feedback through our official channels. We are dedicated to serving you!</p>]]></content:encoded>
+<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="如何开始">如何开始？<a href="https://xiaoyeapp.com/zh-cn/blog/2026/03/18/2082-two-devices-free#%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B" class="hash-link" aria-label="如何开始？的直接链接" title="如何开始？的直接链接" translate="no">​</a></h4>
+<p>体验小烨远控非常简单，只需三步：</p>
+<ol>
+<li class="">访问小烨远控官网（<a href="https://xiaoyeapp.com/" target="_blank" rel="noopener noreferrer" class="">https://xiaoyeapp.com</a>）下载客户端。</li>
+<li class="">使用您喜欢的登录方式（邮箱账户需要先注册，第三方如微信则直接登录）。</li>
+<li class="">在两台您自己的设备上登录同一账号，即可开始永久免费的远程之旅。</li>
+</ol>
+<p><strong>小烨远控2.0.82，致力于成为您安全、高速、简单的远程桌面伙伴。</strong> 无论您是远程办公的技术人员，还是帮家人维护电脑的“家庭IT顾问”，都欢迎来试试看。</p>
+<p><strong>如果在使用中遇到任何问题，或有任何建议，欢迎随时通过官网渠道向我们反馈，我们将竭诚为您服务！</strong></p>]]></content:encoded>
             <category>动态</category>
         </item>
     </channel>
