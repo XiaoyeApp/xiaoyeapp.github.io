@@ -1,13 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Xiaoye Remote Blog</title>
+        <title>小烨工具库 Blog</title>
         <link>https://xiaoyeapp.com/blog</link>
-        <description>Xiaoye Remote Blog</description>
-        <lastBuildDate>Wed, 23 Sep 2026 00:00:00 GMT</lastBuildDate>
+        <description>小烨工具库 Blog</description>
+        <lastBuildDate>Tue, 20 Oct 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-cn</language>
+        <item>
+            <title><![CDATA[WinUI 3 TableView：排序、筛选、分组、编辑数千行]]></title>
+            <link>https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview</link>
+            <guid>https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview</guid>
+            <pubDate>Tue, 20 Oct 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Windows App SDK 2.5.4-experimental 首次放出第一方 TableView 控件，支持列模板、排序、筛选、分组与单元格编辑]]></description>
+            <content:encoded><![CDATA[<p>WinUI 社区久等了。微软在 Windows App SDK <strong>2.5.4-experimental</strong> 中首次放出了第一方表格控件 <strong><code>TableView</code></strong>，位于 <code>Microsoft.UI.Xaml.Controls.Tabular</code> 命名空间，Fluent 风格，原生 WinUI 3。</p>
+<p>先划重点：<strong>TableView 目前是实验性控件，仍在开发中</strong>。官方说得很直白：分享得早，就是想让社区试用、找粗糙边缘、通过反馈和 bug 报告一起 shaping。<strong>API 和行为都可能变化</strong>。如果哪里不符合预期，请提 issue。</p>
+<p>社区长期呼吁 WinUI 3 支持数据表。作为这个方向的第一步，微软以实验性版本放出了 TableView。这一版把<strong>列模板、排序、筛选、分组、单元格编辑</strong>整合进一个原生 WinUI 3 控件。<strong>层级视图和 app context menus 已在后续迭代的开发中</strong>。</p>
+<p><img decoding="async" loading="lazy" alt="1" src="https://xiaoyeapp.com/assets/images/1-339f8cf0baf4a47798b61998a78e8c2e.png" width="960" height="504" class="img_ev3q"></p>
+<!-- -->
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="用真实场景验证contoso-sales-ledger">用真实场景验证：Contoso Sales Ledger<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#%E7%94%A8%E7%9C%9F%E5%AE%9E%E5%9C%BA%E6%99%AF%E9%AA%8C%E8%AF%81contoso-sales-ledger" class="hash-link" aria-label="用真实场景验证：Contoso Sales Ledger的直接链接" title="用真实场景验证：Contoso Sales Ledger的直接链接" translate="no">​</a></h2>
+<p>为了在真实场景里探索 TableView，官方做了 <strong>Contoso Sales Ledger</strong>——一个区域销售团队的 pipeline 台账：<strong>5,000 条交易、11 列</strong>，表格上方还有一排用标准 WinUI 控件搭的 KPI 卡片。</p>
+<p>注意：完整台账截图里包含<strong>应用自定义的工具栏控件</strong>，这些<strong>不是 TableView 内置 UI</strong>。</p>
+<p>首先在 XAML 里声明列：</p>
+<ul>
+<li class=""><code>TableViewTextColumn</code>：普通值</li>
+<li class=""><code>TableViewTemplateColumn</code>：单元格需要真实 UI 时用</li>
+</ul>
+<p>台账里，模板列渲染了账户名旁边的首字母头像、交易阶段的彩色 pill、赢单概率的进度条。<strong>行是虚拟化的</strong>，控件不需要一次性为每笔交易创建视觉行。</p>
+<p><img decoding="async" loading="lazy" alt="2" src="https://xiaoyeapp.com/assets/images/2-031ac289f9f9b35966bf82a2e9c4f3ba.png" width="1035" height="639" class="img_ev3q"></p>
+<p>从 C# WinUI 3 项目 <strong>SalesLedger</strong> 开始，使用下面 Project setup 里的包和资源字典。文中代码摘录是<strong>时间点版本</strong>：每一节只包含介绍该功能所需的代码，已有的 <code>Window</code> 标签、C# imports 和命名空间声明省略。</p>
+<p>在 <code>MainWindow.xaml</code> 里，把现有 <code>Window</code> 内的内容替换成下面的 XAML。在 <code>MainWindow.xaml.cs</code> 里，保留 imports 和命名空间，替换现有 <code>MainWindow</code> 类，并在同一命名空间里加上 <code>Deal</code>。<strong>代码后置只创建数据并赋给表格，没有任何排序、筛选、分组逻辑。</strong></p>
+<p>运行应用：显示十二条交易，按原始列表顺序。<code>ItemsSource</code> 提供行；XAML 绑定只描述如何显示每一行。模型只包含这些列用到的属性，包括 <code>Deal</code> tooltip 用的 <code>Owner</code>。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="️-数据排序">↕️ 数据排序<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#%EF%B8%8F-%E6%95%B0%E6%8D%AE%E6%8E%92%E5%BA%8F" class="hash-link" aria-label="↕️ 数据排序的直接链接" title="↕️ 数据排序的直接链接" translate="no">​</a></h2>
+<p>点击列头即可按该列排序。TableView 的内置表头 UI <strong>一次只排一列</strong>；选另一列会替换当前排序。</p>
+<p>上面的示例<strong>不需要额外代码后置</strong>就能实现表头点击排序。<code>CanUserSortColumns</code> 已启用；文本列用它们的绑定，模板列用 <code>SortMemberPath</code>。金额按数值属性 <code>Amount</code> 排序，而不是格式化后的 <code>AmountText</code>。</p>
+<video controls="" width="700" autoplay="" muted="" loop=""><source src="/assets/medias/3-a48d9c123b77395d52e5ad3da2313f14.mp4" type="video/mp4"></video>
+<p>视频展示的是完整台账 demo，<strong>包括应用自定义的排序控件</strong>。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="-筛选与分组">🔎 筛选与分组<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#-%E7%AD%9B%E9%80%89%E4%B8%8E%E5%88%86%E7%BB%84" class="hash-link" aria-label="🔎 筛选与分组的直接链接" title="🔎 筛选与分组的直接链接" translate="no">​</a></h2>
+<p><code>TableViewSource</code> 把<strong>筛选、排序、分组</strong>组合在一起。文本匹配由应用的筛选谓词实现，<strong>不是</strong> TableView 单独的搜索功能。完整台账把文本框和 Region 选择器结合，并为其 KPI 卡片更新匹配交易的统计。</p>
+<p>下一步，把 <code>Window</code> 内的内容和 <code>MainWindow</code>/<code>Deal</code> 类定义替换成下面匹配的摘录。保留现有 <code>Window</code> 头和 C# imports/命名空间。<strong>到这一步才加入文本框、Clear 按钮及其 handler。</strong> <code>Region</code> 属性及其示例值也在这里引入，因为分组现在需要它们。前一步的金额排序保留。</p>
+<p>输入 <strong>Cloud</strong> 后，视图筛到<strong>两个区域的三条交易</strong>。<strong>Clear</strong> 恢复全部十二条交易，仍按区域分组。每次文本变化都会重新应用筛选和分组，组内按金额降序。这个示例<strong>不需要 Matches helper 或 Region picker</strong>。</p>
+<p><img decoding="async" loading="lazy" alt="5" src="https://xiaoyeapp.com/assets/images/5-28989095733947e0ae4e551de97aa2a0.png" width="1034" height="643" class="img_ev3q"></p>
+<p>分组接收一个 <strong>key selector</strong>，可运行示例用的是 TableView <strong>内置组头</strong>。完整台账加了 <code>GroupHeaderTemplate</code>，用交易数和 open pipeline 展示每个区域。<strong>TableView 提供组 key 和条目数；pipeline 总额由应用计算。</strong> 组可折叠展开，排序在每组内生效。</p>
+<p><img decoding="async" loading="lazy" alt="6" src="https://xiaoyeapp.com/assets/images/6-ab6a7489483e33d705870bcf9d00b686.png" width="1025" height="642" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="️-带校验的编辑">✏️ 带校验的编辑<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#%EF%B8%8F-%E5%B8%A6%E6%A0%A1%E9%AA%8C%E7%9A%84%E7%BC%96%E8%BE%91" class="hash-link" aria-label="✏️ 带校验的编辑的直接链接" title="✏️ 带校验的编辑的直接链接" translate="no">​</a></h2>
+<p>上面可运行的示例<strong>仍然是只读的</strong>。这里展示的编辑流程属于<strong>完整台账应用</strong>。</p>
+<p>设 <code>IsReadOnly="False"</code>，并给模板列一个 <code>CellEditingTemplate</code>，让它的单元格可编辑。<strong>双击或 F2 开始编辑，Enter 提交，Esc 取消。</strong></p>
+<p><code>CellEditEnding</code> 让应用可否决提交。确认 <code>EditAction</code> 是 <strong>Commit</strong>，校验待提交值，无效时设 <code>args.Cancel = true</code> 保持编辑器打开。<strong>校验的是待提交的编辑器值，不要假设它已经到达数据项。</strong></p>
+<p>台账里，输入负数会让编辑器边框变红、显示错误图标、弹出 InfoBar 解释规则。<strong>校验规则和反馈 UI 属于应用；TableView 提供编辑生命周期。</strong></p>
+<p><img decoding="async" loading="lazy" alt="7" src="https://xiaoyeapp.com/assets/images/7-2100c89fa760db73bb837ec29f0028e1.png" width="1031" height="645" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="冻结列密度与工具提示">冻结列、密度与工具提示<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#%E5%86%BB%E7%BB%93%E5%88%97%E5%AF%86%E5%BA%A6%E4%B8%8E%E5%B7%A5%E5%85%B7%E6%8F%90%E7%A4%BA" class="hash-link" aria-label="冻结列、密度与工具提示的直接链接" title="冻结列、密度与工具提示的直接链接" translate="no">​</a></h2>
+<p>宽表里，标识列最好别跑。<code>FrozenEdge="Leading"</code> 让 <strong>Deal 列固定</strong>，横向滚动其余列时它始终可见。</p>
+<p><img decoding="async" loading="lazy" alt="8" src="https://xiaoyeapp.com/assets/images/8-d4e727f9a68dd478305ddd513f7ed1ec.png" width="1047" height="656" class="img_ev3q"></p>
+<p>密度用<strong>一个属性</strong>在 <strong>Compact、Standard、Comfortable</strong> 之间切换：数据密集屏幕用紧行，触控交互用宽行。</p>
+<p><img decoding="async" loading="lazy" alt="9" src="https://xiaoyeapp.com/assets/images/9-92372e6161e927560b2a04a36b9d90b6.png" width="1047" height="648" class="img_ev3q"></p>
+<p><code>HeaderToolTip</code> 和 <code>CellToolTipBinding</code> 不挤占表格空间就能补充上下文——从解释列的排序规则，到交易的额外细节。</p>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="自己动手操作">自己动手操作<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%E6%93%8D%E4%BD%9C" class="hash-link" aria-label="自己动手操作的直接链接" title="自己动手操作的直接链接" translate="no">​</a></h2>
+<p>安装 <strong>Microsoft.WindowsAppSDK 2.5.4-experimental</strong>，读 release notes，探索实验性 <strong>Tabular API reference</strong>。</p>
+<p>这一版要注意：用 <code>WindowsAppSDKSelfContained=true</code> 配合资源合并，避开 <strong>#12115</strong> 报告的 framework-dependent 启动问题。下面的设置两样都包含。</p>
+<p>首先创建一个名为 <strong>SalesLedger</strong> 的 C# WinUI 3 应用，使用 <strong>Microsoft.WindowsAppSDK 2.5.4-experimental</strong>。保留模板的 <code>App.xaml.cs</code>。</p>
+<ul>
+<li class=""><strong>项目</strong>：<code>PropertyGroup</code> 里设 <code>WindowsAppSDKSelfContained=true</code>、<code>WindowsPackageType=None</code>、<code>EnableMsixTooling=false</code></li>
+<li class=""><strong>F5</strong>：<code>Properties\launchSettings.json</code> 用 unpackaged profile，<code>commandName</code> 设为 <code>Project</code>，并在 Visual Studio 里选中它</li>
+<li class=""><strong>XAML</strong>：应用资源里合并 <code>XamlControlsResources</code> 和 <code>TabularControlsResources</code>；现有 <code>Window</code> 加 <code>xmlns:tv="using:Microsoft.UI.Xaml.Controls.Tabular"</code></li>
+<li class=""><strong>C# imports</strong>：<code>System</code>、<code>System.Collections.Generic</code>、<code>System.Globalization</code>、<code>Microsoft.UI.Xaml</code>、<code>Microsoft.UI.Xaml.Controls</code>、<code>Microsoft.UI.Xaml.Controls.Tabular</code>、<code>Microsoft.UI.Xaml.Data</code></li>
+</ul>
+<h2 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="小结">小结<a href="https://xiaoyeapp.com/blog/2026/10/20/winui3-tabview#%E5%B0%8F%E7%BB%93" class="hash-link" aria-label="小结的直接链接" title="小结的直接链接" translate="no">​</a></h2>
+<p>TableView 补的是 WinUI 3 长期缺位的数据表能力：<strong>第一方、Fluent、原生、虚拟化</strong>，排序筛选分组编辑都进了同一个控件。实验性意味着别急着上生产，但也意味着<strong>现在正是提反馈、影响它最终形态的时候</strong>。</p>
+<p>层级视图和 app context menus 在路上。社区等了很久的 DataGrid，终于有了官方答案的雏形。</p>]]></content:encoded>
+            <category>WinUI</category>
+            <category>.NET</category>
+            <category>TableView</category>
+        </item>
         <item>
             <title><![CDATA[记录一个.NET中的AOT死锁问题]]></title>
             <link>https://xiaoyeapp.com/blog/2026/09/23/dotnet-aot-deadlock-notes</link>
@@ -1178,49 +1243,6 @@
 <p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/assets/images/zh-QQ20260320-165947-3dc3380d49d5ebf7d6d61889036ec31e.png" width="798" height="432" class="img_ev3q"></p>
 <p>掌握了这些技巧，相信你的远程工作体验会更加顺畅。如果你有任何问题或更好的建议，欢迎在评论区留言讨论！</p>]]></content:encoded>
             <category>Windows远程</category>
-        </item>
-        <item>
-            <title><![CDATA[小烨远控2.0.82发布：两台设备永久免费]]></title>
-            <link>https://xiaoyeapp.com/blog/2026/03/18/2082-two-devices-free</link>
-            <guid>https://xiaoyeapp.com/blog/2026/03/18/2082-two-devices-free</guid>
-            <pubDate>Wed, 18 Mar 2026 00:00:00 GMT</pubDate>
-            <description><![CDATA[还在为远程办公时复杂的网络配置烦恼？或为寻找一款既安全又免费的远控方案而四处尝试？今天，小烨远控带来的新版本，或许正是您需要的答案。]]></description>
-            <content:encoded><![CDATA[<p>还在为远程办公时复杂的网络配置烦恼？或为寻找一款<strong>既安全又免费</strong>的远控方案而四处尝试？今天，小烨远控带来的新版本，或许正是您需要的答案。</p>
-<p>我们很高兴地宣布，<strong>小烨远控2.0.82版本正式发布！</strong> 本次更新带来了一个极具诚意的政策：<strong>两台设备，永久免费</strong>。无论您是为家庭电脑提供技术支持，还是需要在两个办公地点间无缝切换，这个免费版本足以覆盖大多数个人用户的日常需求。</p>
-<p><img decoding="async" loading="lazy" src="https://xiaoyeapp.com/assets/images/zh-QQ20260318-143721-562ac9e3291faa0f7b897027d149ed4a.png" width="798" height="432" class="img_ev3q"></p>
-<!-- -->
-<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="为什么选择小烨远控">为什么选择小烨远控？<a href="https://xiaoyeapp.com/blog/2026/03/18/2082-two-devices-free#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E5%B0%8F%E7%83%A8%E8%BF%9C%E6%8E%A7" class="hash-link" aria-label="为什么选择小烨远控？的直接链接" title="为什么选择小烨远控？的直接链接" translate="no">​</a></h4>
-<p>在免费的基础上，小烨远控更坚持在<strong>安全与体验</strong>上做到极致。</p>
-<ol>
-<li class=""><strong>安全，从底层设计开始</strong>
-<ul>
-<li class=""><strong>设备按账户隔离</strong>：您的设备仅对您自己的账户可见，天然避免了来自公网的随意扫描和攻击。</li>
-<li class=""><strong>全程加密，无惧窥探</strong>：所有远程连接数据均经过高强度加密，确保您在公共网络下操作也足够私密。</li>
-<li class=""><strong>无需公网IP</strong>：告别复杂的端口映射和网络配置，从根本上减少了网络攻击面。</li>
-</ul>
-</li>
-<li class=""><strong>性能，为高效工作而生</strong>
-<ul>
-<li class=""><strong>国内多节点加速</strong>：我们在国内部署了多个网络节点，系统会自动为您选择最优路径，显著降低延迟，让远程操作像在本地一样流畅。</li>
-<li class=""><strong>原生RDP体验</strong>：完美支持Windows远程桌面协议，如果您是Windows用户，能享受到最熟悉、最高效的原生桌面访问体验。</li>
-</ul>
-</li>
-<li class=""><strong>便捷，一个账号通行</strong>
-<ul>
-<li class="">支持<strong>邮箱、微信、手机号</strong>等多种登录方式。您也可以使用已有的Microsoft、GitHub账号快速接入，无需重复注册。一个“小烨通行证”，即可管理您的所有远程设备和未来更多服务。</li>
-</ul>
-</li>
-</ol>
-<h4 class="anchor anchorTargetHideOnScrollNavbar_vjPI" id="如何开始">如何开始？<a href="https://xiaoyeapp.com/blog/2026/03/18/2082-two-devices-free#%E5%A6%82%E4%BD%95%E5%BC%80%E5%A7%8B" class="hash-link" aria-label="如何开始？的直接链接" title="如何开始？的直接链接" translate="no">​</a></h4>
-<p>体验小烨远控非常简单，只需三步：</p>
-<ol>
-<li class="">访问小烨远控官网（<a href="https://xiaoyeapp.com/" target="_blank" rel="noopener noreferrer" class="">https://xiaoyeapp.com</a>）下载客户端。</li>
-<li class="">使用您喜欢的登录方式（邮箱账户需要先注册，第三方如微信则直接登录）。</li>
-<li class="">在两台您自己的设备上登录同一账号，即可开始永久免费的远程之旅。</li>
-</ol>
-<p><strong>小烨远控2.0.82，致力于成为您安全、高速、简单的远程桌面伙伴。</strong> 无论您是远程办公的技术人员，还是帮家人维护电脑的“家庭IT顾问”，都欢迎来试试看。</p>
-<p><strong>如果在使用中遇到任何问题，或有任何建议，欢迎随时通过官网渠道向我们反馈，我们将竭诚为您服务！</strong></p>]]></content:encoded>
-            <category>动态</category>
         </item>
     </channel>
 </rss>
